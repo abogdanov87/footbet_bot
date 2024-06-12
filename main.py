@@ -62,14 +62,20 @@ async def handle_start(message: types.Message):
     btn2 = types.InlineKeyboardButton(text='Таблица', callback_data='table')
     button_row = [btn1, btn2]
     markup = types.InlineKeyboardMarkup(inline_keyboard=[button_row])
-    await message.delete()
+    try:
+        await message.delete()
+    except:
+        pass
     await message.answer('Привет!', reply_markup=markup)
 
 
 @router.callback_query(F.data == 'table')
 async def callback_query_handler(callback_query: types.CallbackQuery):
     chat_id = callback_query.message.chat.id
-    await callback_query.message.delete()
+    try:
+        await callback_query.message.delete()
+    except:
+        pass
     await callback_query.bot.send_message(chat_id, get_table())
 
 
