@@ -62,11 +62,11 @@ async def handle_start(message: types.Message):
     btn2 = types.InlineKeyboardButton(text='Таблица', callback_data='table')
     button_row = [btn1, btn2]
     markup = types.InlineKeyboardMarkup(inline_keyboard=[button_row])
+    await message.answer('Привет!', reply_markup=markup)
     try:
         await message.delete()
     except:
         pass
-    await message.answer('Привет!', reply_markup=markup)
 
 
 @router.callback_query(F.data == 'table')
