@@ -4,7 +4,7 @@ import requests
 import sys
 from aiogram import Bot, Dispatcher, Router, F, types
 from aiogram.types.web_app_info import WebAppInfo
-# from aiogram.client.default import DefaultBotProperties
+from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 from aiogram.types import Message
@@ -15,8 +15,7 @@ URL = 'https://footbet.fun/api/v2/tournament-table/1/'
 # URL = 'http://127.0.0.1:8000/api/v2/tournament-table/1/'
 TOKEN = '7408980611:AAHiXQmEhmrvX8sEfWVEv2ZsUjZPJkGjBIw' # PROD
 # TOKEN = '7163748824:AAHRLrUUW308fuQ5JzL39Z7K-SvfqEi_PQk' # TEST
-# bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
-bot = Bot(token=TOKEN, parse_mode=ParseMode.HTML)
+bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 dp = Dispatcher()
 router = Router(name=__name__)
 dp.include_routers(router)
@@ -47,6 +46,10 @@ def get_table():
         for participant in participants:
             username = participant['user']['nickname'] or participant['user']['username']
             score = participant['score']['points']
+            if score - (score // 1) == 0:
+                score = int(score)
+            else:
+                pass
             info_msg += f""" {username} — {score}
 """
             position = position + 1
