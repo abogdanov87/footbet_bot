@@ -50,7 +50,7 @@ def get_table():
                 score = int(score)
             else:
                 pass
-            info_msg += f""" {username} — {score}
+            info_msg += f"""{position}. {username} — {score}
 """
             position = position + 1
     return info_msg
