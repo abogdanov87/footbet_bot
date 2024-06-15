@@ -31,18 +31,7 @@ def get_table():
 
 """
         position = 1
-        # participants = data['tournament_participant']
-        participants = sorted(
-            data['tournament_participant'], 
-            key=lambda p: (
-                p['score']['points'],
-                p['score']['exact_result'],
-                p['score']['goals_difference'],
-                p['score']['match_result'],
-                (p['user']['nickname'] or p['user']['username'])
-            ), 
-            reverse=True)
-        # import pdb; pdb.set_trace()
+        participants = data['tournament_participant']
         for participant in participants:
             username = participant['user']['nickname'] or participant['user']['username']
             score = participant['score']['points']
